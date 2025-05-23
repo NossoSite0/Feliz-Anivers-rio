@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Para o Amor da Minha Vida</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&family=Dancing+Script&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="midia/favicon.ico" type="image/x-icon" />
+  <style>
+  
+    body {
+      animation: fadeIn 1s ease-in;
+      margin: 0;
+      background-color: black;
+      color: white;
+      font-family: 'Georgia', serif; /* fonte com toque romântico e elegante */
+      overflow-x: hidden;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; filter: blur(5px); }
+      to { opacity: 1; filter: blur(0); }
+    }
+    #tela-inicial {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .botao-amor {
+      background: linear-gradient(145deg, #8b0000, #b22222);
+      color: #fff;
+      font-family: 'Great Vibes', cursive;
+      font-size: 36px;
+      padding: 20px 60px;
+      border: 3px solid #fff;
+      border-radius: 40px;
+      text-decoration: none;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+      transition: all 0.3s ease-in-out;
+      position: relative;
+      cursor: pointer;
+      width: auto;
+    }
+    .botao-amor::before {
+      content: '❤';
+      position: absolute;
+      left: 1px;
+      margin-left: 18px;
+      font-size: 28px;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+    .botao-amor:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+      background: linear-gradient(145deg, #b22222, #8b0000);
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+    #conteudo-principal {
+      display: none;
+      padding-bottom: 50px;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://i.pinimg.com/originals/e1/f2/12/e1f212f0bb65a0308cca1904a23d989e.gif') repeat;
+      opacity: 0.2;
+      z-index: -1;
+    }
+    h1 {
+      text-align: center;
+      color: red;
+      font-family: 'Dancing Script', cursive;
+      font-size: 3em;
+      margin-top: 40px;
+    }
+    .carousel {
+      width: auto;
+      max-width: 450px;
+      height: 280px;
+      margin: 40px auto;
+      perspective: 1000px;
+      position: relative;
+      user-select: none;
+      touch-action: pan-y;
+      overflow-x: visible;
+    }
+    .carousel img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+      opacity: 0;
+      z-index: 0;
+      pointer-events: none;
+      will-change: transform;
+    }
+    .carousel img.ativo {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+      z-index: 2;
+      pointer-events: auto;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+    }
+    .carousel img.anterior {
+      transform: translateX(-30%) scale(0.9);
+      opacity: 0.4;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .carousel img.proximo {
+      transform: translateX(30%) scale(0.9);
+      opacity: 0.4;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .frase-romantica {
+      text-align: center;
+      font-size: 1.2em;
+      color: #ccc;
+      margin: 70px auto 90px auto; /* topo, laterais, base */
+    }
+    .contador {
+      text-align: center;
+      font-size: 1.6em;
+      margin-top: 40px;
+    }
+    .desde {
+      text-align: center;
+      font-size: 1em;
+      color: #ccc;
+      margin-top: 10px;
+    }
+    .frase-final {
+      text-align: center;
+      font-size: 1em;
+      margin: 60px auto 40px auto; /* topo, laterais, base */
+      font-weight: 600;
+      max-width: 800px;
+      line-height: 1.6;
+      padding: 80px;
+      color: #ffffff; /* um tom mais suave que preto */
+      font-family: 'Georgia', serif; /* fonte com toque romântico e elegante */
+      border: 2px dashed rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 20px rgba(255, 0, 85, 0.2);
+      border-radius: 20px;
+      animation: fadeInUp 5s ease-in-out;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .player {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 50px auto;
+      gap: -35px;
+    }
+    .player button {
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s;
+    }
+
+    .player img{
+      width: 45px; /* ou o tamanho que quiser */
+      height: auto;
+    }
+
+    .player button:hover {
+      background-color: rgb(68, 0, 0);
+
+    }
+
+    .player button:active {
+      background-color: #300000; /* Vermelho escuro */
+      transform: translateY(2px) scale(0.98); /* efeito de afundar */
+    }
+
+    /* NOVO: Estilos para o modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
+
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-image {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.show .modal-image {
+      transform: scale(1);
+    }
+
+    /* Estilo adicional opcional para o carousel */
+    .carousel img {
+      cursor: pointer;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+
+    @media (max-width: 600px) {
+      .botao-amor{
+        width: 90%;
+      }
+
+      .botao-amor::before {
+        margin-left: 18px;
+      }
+
+
+      body{
+        padding: 10%;
+      }
+
+      h1 {
+        margin-top: -10px;
+        font-size: 8.7vw;
+        margin-left: -15px;
+        margin-right: -15px;
+      }
+
+
+      .frase-romantica,
+      .contador,
+      .desde,
+      .frase-final {
+        font-size: 1.1em;
+        padding: 0 20px;
+        line-height: 1.6;
+        margin: 50px auto;
+      }
+
+      .frase-romantica{
+        margin-top: -20px;
+        font-size: 1.2em;
+      }
+
+      .contador{
+        margin: 50px -30px;
+        font-size: 1.28em;
+      }
+
+      .carousel-wrapper {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+      }
+
+      .carousel {
+        width: 80%;
+        height: 350px; /* AUMENTADO para maior destaque */
+        margin: 30px auto;
+        
+      }
+
+      .carousel img {
+        max-width: 100%;
+        box-sizing: border-box;
+        max-height: 80%; /* Ou 80%, se quiser mais espaço */
+      }
+
+
+      .botao-amor {
+        font-size: 28px;
+        padding: 15px 30px;
+        border-width: 2px;
+      }
+
+      .botao-amor::before {
+        left: 10px;
+        font-size: 22px;
+      }
+
+      .player {
+        flex-direction: row;
+        gap: 10px;
+        margin: 30px auto;
+      }
+
+      .player img {
+        width: 35px;
+      }
+
+      .modal-image {
+        max-width: 95%;
+        max-height: 80%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="tela-inicial">
+    <button class="botao-amor" id="entrarBtn"> Para o meu Amor</button>
+  </div>
+
+  <div id="conteudo-principal" style="display: none;"><br><br><br>
+    <h1>Feliz Aniversário, meu Amor</h1><br>
+
+    <div class="carousel-wrapper">
+      <div class="carousel" id="carousel">
+        <img src="midia/Manu/0.jpg" alt="Foto 0" />
+        <img src="midia/Manu/1.jpg" alt="Foto 1" />
+        <img src="midia/Manu/2.jpeg" alt="Foto 2" />
+        <img src="midia/Manu/3.jpg" alt="Foto 3" />
+        <img src="midia/Manu/4.jpg" alt="Foto 4" />
+        <img src="midia/Manu/5.jpg" alt="Foto 5" />
+        <img src="midia/Manu/6.jpeg" alt="Foto 6" />
+        <img src="midia/Manu/7.jpeg" alt="Foto 7" />
+        <img src="midia/Manu/8.jpeg" alt="Foto 8" />
+        <img src="midia/Manu/9.jpeg" alt="Foto 9" />
+        <img src="midia/Manu/10.jpg" alt="Foto 10" />
+        <img src="midia/Manu/11.jpg" alt="Foto 11" />
+        <img src="midia/Manu/12.jpg" alt="Foto 12" />
+        <img src="midia/Manu/13.jpeg" alt="Foto 13" />
+        <img src="midia/Manu/14.jpeg" alt="Foto 14" />
+        <img src="midia/Manu/15.jpg" alt="Foto 15" />
+        <img src="midia/Manu/16.jpg" alt="Foto 16" />
+        <img src="midia/Manu/17.jpg" alt="Foto 17" />
+        <img src="midia/Manu/18.jpeg" alt="Foto 18" />
+      </div>
+    </div>
+
+    <div class="frase-romantica">Você é o capítulo mais bonito da minha história.</div>
+
+    <div class="contador" id="contador">
+      <strong>Juntos há: <span id="tempo"></span>
+    </div>
+
+    <hr style="
+      width: 70%;
+      height: 10px;
+      background: linear-gradient(to right, #ff4d4d, #ff0000, #ff4d4d);
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(255, 0, 0, 0.5);
+      margin: 30px auto;"
+    >
+
+
+    <div class="frase-final">
+      <p><strong>Feliz aniversário, meu amor ❤️</strong></p>
+
+      <br><p>Hoje é um dia tão especial, tanto para você quanto para mim. É a data na qual você celebra mais um ano de vida, e a data na qual eu comemoro a <strong>felicidade</strong> de poder te ver crescer e ser essa pessoa tão especial e incrível que <em>mudou o meu mundo</em>.</p>
+<p style="font-size: 24px;">❤️</p>
+
+      <p>Faço essa mensagem para expressar o quão <strong>feliz</strong> eu sou e me sinto por viver esse momento ao seu lado. Desejo-te o <strong>melhor deste mundo</strong> e espero que todos os seus sonhos se tornem realidade, porque <em>me inspira ver você ser essa pessoa tão dedicada, inteligente, linda e esforçada</em>, pela qual me apaixono mais a cada dia.</p>
+<p style="font-size: 24px;">❤️</p>
+
+      <p>Criei este site como uma forma de demonstrar o quanto eu te amo, para <em>guardar nossas recordações</em>, nossos momentos tão especiais, te parabenizar e te agradecer por ser o <strong>motivo e a razão dos meus sorrisos diários</strong>.</p>
+
+      <br><p><strong>Feliz aniversário, meu amor 🥳</strong></p>
+
+    </div>
+
+    <div class="desde">Juntos desde 13/03/2025</div>
+
+    <div class="player">
+      <button id="antBtn" style="cursor: pointer; background: transparent;"><img src="midia\seta esq- Copia.png" alt=""></button>
+      <button id="playBtn" style="padding: 25px; cursor: pointer; background: transparent;"><img src="midia\PLAY OUTRO.png" alt=""></button>
+      <button id="proxBtn" style="cursor: pointer; background: transparent;"><img src="midia\seta.png" alt=""></button>
+
+      <audio id="musica" src="https://drive.google.com/file/d/1-rMIkKHgYAkDxse80uxhZ1ixBcPS8kIC/view?usp=sharing" preload="auto"></audio>
+      <audio id="musica1" src="https://drive.google.com/file/d/1Y-V_awiXOiHDAzZG9v0J0OoRXmbcVkup/view?usp=sharing" ></audio>
+      <audio id="musica2" src="https://drive.google.com/file/d/1QABF9O-GgNN41Cfzk_FjLOzb11ncwcN9/view?usp=sharing" ></audio>
+      <audio id="musica3" src="https://drive.google.com/file/d/18B2YlETC0ej-MSUuhxtrJna8pp4vr8s1/view?usp=sharing" ></audio>
+    </div>
+  </div>
+
+  <!-- NOVO: Estrutura do modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <img id="modalImage" class="modal-image" src="" alt="Imagem Ampliada" />
+  </div>
+
+  <script>
+  const entrarBtn = document.getElementById('entrarBtn');
+  const telaInicial = document.getElementById('tela-inicial');
+  const conteudoPrincipal = document.getElementById('conteudo-principal');
+
+  entrarBtn.addEventListener('click', () => {
+    telaInicial.style.display = 'none';
+    conteudoPrincipal.style.display = 'block';
+    tocarMusica();
+  });
+
+  // Lista de músicas
+  const musicas = [
+    'https://drive.google.com/drive/u/3/folders/1V8xj3YDZtJov6WWBnVf1qwo5_UJdwE4i',
+    'midia/mus1.mp3',
+    'midia/mus2.mp3',
+    'midia/mus3.mp3',
+  ];
+
+  let musicaAtual = 0;
+  const musica = new Audio(musicas[musicaAtual]);
+
+  const playBtn = document.getElementById('playBtn');
+  const playImg = playBtn.querySelector('img'); // Seleciona a imagem dentro do botão
+  const pauseBtn = document.getElementById('pauseBtn');
+
+  function tocarMusica() {
+    musica.src = musicas[musicaAtual];
+    musica.play().catch(e => {
+      console.log('Falha ao tocar música:', e);
+    });
+  }
+
+  musica.addEventListener('ended', () => {
+    musicaAtual = (musicaAtual + 1) % musicas.length;
+    tocarMusica();
+  });
+
+  let tocando = true;
+  playBtn.addEventListener('click', () => {
+  if (tocando) {
+    musica.pause();
+    tocando = false;
+    playImg.src = 'midia/PAUSE.png'; // troca para imagem de play
+  } else {
+    musica.play().then(() => {
+      tocando = true;
+      playImg.src = 'midia/PLAY OUTRO.png'; // troca para imagem de pause
+    }).catch(e => {
+      console.log('Erro ao tocar música:', e);
+    });
+  }
+});
+
+  const tempoSpan = document.getElementById('tempo');
+  const dataInicio = new Date('2025-03-13T00:00:00');
+
+  function atualizarTempo() {
+    const agora = new Date();
+    let diff = agora - dataInicio;
+
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -= dias * (1000 * 60 * 60 * 24);
+    const horas = Math.floor(diff / (1000 * 60 * 60));
+    diff -= horas * (1000 * 60 * 60);
+    const minutos = Math.floor(diff / (1000 * 60));
+    diff -= minutos * (1000 * 60);
+    const segundos = Math.floor(diff / 1000);
+
+    tempoSpan.textContent = `${dias} dias, ${horas}h, ${minutos}m, ${segundos}s`;
+  }
+  setInterval(atualizarTempo, 1000);
+  atualizarTempo();
+
+  const carousel = document.getElementById('carousel');
+  const imgs = carousel.querySelectorAll('img');
+  let atual = 0;
+
+  let autoPlayInterval;
+  const autoPlayDelay = 4000;
+
+  function atualizarCarousel() {
+    imgs.forEach((img, i) => {
+      img.classList.remove('ativo', 'anterior', 'proximo');
+      if (i === atual) {
+        img.classList.add('ativo');
+        img.style.transform = 'translateX(0) scale(1)';
+        img.style.opacity = '1';
+        img.style.zIndex = 2;
+      } else if (i === (atual - 1 + imgs.length) % imgs.length) {
+        img.classList.add('anterior');
+        img.style.transform = 'translateX(-30%) scale(0.9)';
+        img.style.opacity = '0.4';
+        img.style.zIndex = 1;
+      } else if (i === (atual + 1) % imgs.length) {
+        img.classList.add('proximo');
+        img.style.transform = 'translateX(30%) scale(0.9)';
+        img.style.opacity = '0.4';
+        img.style.zIndex = 1;
+      } else {
+        img.style.transform = 'translateX(100%) scale(0.8)';
+        img.style.opacity = '0';
+        img.style.zIndex = 0;
+      }
+    });
+  }
+
+  function proximo() {
+    atual = (atual + 1) % imgs.length;
+    atualizarCarousel();
+  }
+
+  function anterior() {
+    atual = (atual - 1 + imgs.length) % imgs.length;
+    atualizarCarousel();
+  }
+
+  function iniciarAutoPlay() {
+    autoPlayInterval = setInterval(proximo, autoPlayDelay);
+  }
+  function pararAutoPlay() {
+    clearInterval(autoPlayInterval);
+  }
+
+  atualizarCarousel();
+  iniciarAutoPlay();
+
+  let startX = 0;
+  let isDragging = false;
+
+  carousel.addEventListener('pointerdown', e => {
+    pararAutoPlay();
+    startX = e.clientX;
+    isDragging = true;
+    carousel.style.cursor = 'grabbing';
+  });
+
+  carousel.addEventListener('pointermove', e => {
+    if (!isDragging) return;
+    const diffX = e.clientX - startX;
+    if (Math.abs(diffX) > 50) {
+      if (diffX > 0) {
+        anterior();
+      } else {
+        proximo();
+      }
+      isDragging = false;
+      iniciarAutoPlay();
+    }
+  });
+
+  carousel.addEventListener('pointerup', e => {
+    isDragging = false;
+    carousel.style.cursor = 'grab';
+    iniciarAutoPlay();
+  });
+  carousel.addEventListener('pointerleave', e => {
+    if (isDragging) {
+      isDragging = false;
+      carousel.style.cursor = 'grab';
+      iniciarAutoPlay();
+    }
+  });
+
+  // Modal
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalImage = document.getElementById('modalImage');
+
+  carousel.addEventListener('click', e => {
+    const img = e.target;
+    if (img.tagName === 'IMG' && img.classList.contains('ativo')) {
+      modalImage.src = img.src;
+      modalOverlay.classList.add('show');
+    }
+  });
+
+  modalOverlay.addEventListener('click', e => {
+    if (e.target === modalOverlay) {
+      modalOverlay.classList.remove('show');
+    }
+  });
+
+  const antBtn = document.getElementById('antBtn');
+    antBtn.addEventListener('click', () => {
+      if (musicaAtual > 0) {
+        musicaAtual--;
+      } else {
+        musicaAtual = musicas.length - 1; // Volta para a última música se estiver na primeira
+      }
+      tocarMusica(musicaAtual);
+    });
+
+  const proxBtn = document.getElementById('proxBtn');
+  proxBtn.addEventListener('click', () => {
+    if (musicaAtual < musicas.length - 1) {
+      musicaAtual++;
+    } else {
+      musicaAtual = 0; // Volta para a primeira música se estiver na última
+    }
+    tocarMusica(musicaAtual);
+  });
+
+</script>
+
+</body>
+</html>
